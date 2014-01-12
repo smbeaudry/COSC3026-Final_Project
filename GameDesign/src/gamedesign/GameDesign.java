@@ -8,7 +8,8 @@ package gamedesign;
 
 /**
  *
- * @author No one yet
+ * @author YO MAMMA
+ * 
  */
 public class GameDesign {
 

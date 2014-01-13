@@ -8,7 +8,7 @@ package gamedesign;
 
 /**
  *
- * @author YO MAMMA
+ * @author The team
  * 
  */
 public class GameDesign {
@@ -20,6 +20,10 @@ public class GameDesign {
         // TODO code application logic here
         
         //Test
+    }
+    
+    public static void shuffleMap(){
+        
     }
     
 }

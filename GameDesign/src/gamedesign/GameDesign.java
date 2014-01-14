@@ -13,16 +13,28 @@ package gamedesign;
  */
 public class GameDesign {
 
+    public static Room[][] map;
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
         
-        //Test
     }
     
     public static void shuffleMap(){
+        int maxRooms = (int)((Math.random() * 60) + 1);
+        //Map maximum size
+        map = new Room[10][10];
+        int centerX = map.length / 2;
+        int centerY = map[0].length / 2;
+        //create and place center room
+        Room room = new Room();
+        room.setVisited(true);
+        //(length [10] / 2) == 5 therefore position 6,6
+        map[centerX][centerY] = new Room();
+        
         
     }
     

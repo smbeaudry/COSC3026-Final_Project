@@ -7,7 +7,6 @@
 package gamedesign;
 
 /**
- *
  * @author Luc Breault
  */
 public class Room {
@@ -24,6 +23,14 @@ public class Room {
         roomType = null;
     }
     
+    /**
+     * Overloaded Room constructor. Called when rooms are generated after the 
+     * program's initialization.
+     * 
+     * @param neighbours The cells that are adjacent to this room
+     * @param doors Whether or not there are doors in the NWSE directions
+     * @param roomType A friendly name for the room
+     */
     public Room(Room[] neighbours, boolean[] doors, String roomType)
     {
         visited = false;
@@ -39,32 +46,62 @@ public class Room {
         this.roomType = roomType;
     }
     
+    /**
+     * Set the friendly name of the room
+     * @param roomType String value for the room
+     */
     public void setRoomType(String roomType)
     {
         this.roomType = roomType;
     }
     
+    /*
+        Return the friendly name of the room
+    */
     public String getRoomType()
     {
         return roomType;
     }
     
+    /**
+     * Sets whether or not the room has been visited
+     * @param isVisited boolean for the visit flag
+     */
     public void setVisited(boolean isVisited){
         visited = isVisited;
     }
     
+    /**
+     * Returns the value of the visit flag
+     * @return boolean for the visit flag
+     */
     public boolean isVisited(){
-        return visited;
+        return this.visited;
     }
     
+    /**
+     * Sets the room adjacent to this one with an index for its direction
+     * @param index The NWSE index of the room
+     * @param neighbour The Room that is adjacent
+     */
     public void setNeighbour(int index, Room neighbour){
         neighbours[index] = neighbour;
     }
     
+    /**
+     * Returns the adjacent Room at given index
+     * @param index Index for NWSE of adjacent room
+     * @return The Room that is adjacent
+     */
     public Room getNeighbour(int index){
         return neighbours[index];
     }
     
+    /**
+     * Returns boolean of whether the Room has a door at given index
+     * @param index The NWSE index to be checked
+     * @return boolean of hasDoor flag
+     */
     public boolean hasDoor(int index){
         return doors[index];
     }

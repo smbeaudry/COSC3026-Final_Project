@@ -10,7 +10,7 @@ package gamedesign;
  *
  * @author David Pellegrini
  */
-public class Player {
+public class Player extends Perk{
     
     protected int maxHealth, currHealth, maxAP, currAP, id, dmg;
     protected int[] stats;
@@ -31,6 +31,8 @@ public class Player {
         {
             stats[i] = 1;
         }
+        
+        perks = createPerks();
         //inventory[0] = rulebook
         
         //may need more work
@@ -76,4 +78,13 @@ public class Player {
         return dmg;
     }
     
+    public ArrayBag<Perk> createPerks(){
+       
+        ArrayBag<Perk> default_perks = new ArrayBag<Perk>();
+        Perk testPerk = new Perk(false, 5, "strength", "Heavy Lifter");
+        default_perks.add(testPerk);
+        
+        
+        return default_perks;
+    }
 }

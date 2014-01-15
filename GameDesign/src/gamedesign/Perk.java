@@ -14,14 +14,23 @@ public class Perk{
     
     private boolean enabled;
     private int statChange;
-    private String variable;
+    private String attribute;
+    private String name;
     
     public Perk(){
         
         enabled = false;
         statChange = 0;
-        variable = null;
+        attribute = null;
+        name = null;
   
+    }
+    
+    public Perk(boolean status, int sChange, String att, String perkName){
+        enabled = status;
+        statChange = sChange;
+        attribute = att;
+        name = perkName;
     }
     
     public boolean getEnabled(){
@@ -32,19 +41,27 @@ public class Perk{
         return statChange;
     }
     
-    public String getVariable(){
-        return variable;
+    public String getAttribute(){
+        return attribute;
+    }
+    
+    public String getName(){
+        return name;
     }
     
     public void setEnabled(boolean newValue){
         enabled = newValue;
     }
     
-    public void setVariable(String newValue){
-        variable = newValue;
+    public void setAttribute(String newValue){
+        attribute = newValue;
     }
     
     public void setStatChange(int newValue){
         statChange = newValue;
+    }
+    
+    public void setName(String newName){
+        name = newName;
     }
 }

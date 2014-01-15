@@ -1,4 +1,4 @@
-package question3;
+package gamedesign;
 
 // File: IntArrayBag.java from the package edu.colorado.collections
 // Additional javadoc documentation is available from the IntArrayBag link in:

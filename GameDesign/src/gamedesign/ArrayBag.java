@@ -26,7 +26,7 @@ package question3;
 *   Jul 24, 2013
 *
 * modified by: Luc Breault
-* modified by ID: 0313350
+* modified by ID: MYSTERYYYYYY
 ******************************************************************************/
 public class ArrayBag<O> implements Cloneable
 {
@@ -35,7 +35,7 @@ public class ArrayBag<O> implements Cloneable
    //      manyItems, which is no more than data.length.
    //   2. For an empty bag, we do not care what is stored in any of data;
    //      for a non-empty bag, the elements in the bag are stored in data[0]
-   //      through data[manyItems-1], and we don’t care what’s in the
+   //      through data[manyItems-1], and we donï¿½t care whatï¿½s in the
    //      rest of data.
    private Object[] data;
    private int manyItems; 

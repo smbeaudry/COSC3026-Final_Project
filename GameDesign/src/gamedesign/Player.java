@@ -10,13 +10,14 @@ package gamedesign;
  *
  * @author David Pellegrini
  */
+import java.util.ArrayList;
 public class Player extends Perk{
     
     protected int maxHealth, currHealth, maxAP, currAP, id, dmg;
     protected int[] stats;
-    protected ArrayBag<Item> inventory;
+    protected ArrayList<Item> inventory;
     protected Skills[] skills;
-    protected ArrayBag<Perk> perks;
+    protected ArrayList<Perk> perks;
     public static final int STR=0, INTL=1, LUCK=2, PERC=3, AGIL=4, ATK=5, DEF=6;
     
     
@@ -84,9 +85,9 @@ public class Player extends Perk{
      * be run in the player's constructor
      * @return An ArrayBag<Perk> of the player's default perks
      */
-    public ArrayBag<Perk> createPerks(){
+    public ArrayList<Perk> createPerks(){
        
-        ArrayBag<Perk> default_perks = new ArrayBag<Perk>();
+        ArrayList<Perk> default_perks = new ArrayList<Perk>();
         Perk testPerk = new Perk(false, 5, "strength", "Heavy Lifter");
         default_perks.add(testPerk);
         
@@ -99,11 +100,16 @@ public class Player extends Perk{
      * will be run in the player's constructor
      * @return An ArrayBag<Item> of the player's default items
      */
-    public ArrayBag<Item> createInventory(){
-        ArrayBag<Item> default_inventory = new ArrayBag<Item>();
+    public ArrayList<Item> createInventory(){
+        ArrayList<Item> default_inventory = new ArrayList<Item>();
         Item testItem = new Item();
         default_inventory.add(testItem);
         
         return default_inventory;
     }
+    
+    public int calculateAttack(){
+        return 0;
+    }
 }
+

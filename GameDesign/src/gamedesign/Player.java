@@ -14,9 +14,9 @@ public class Player extends Perk{
     
     protected int maxHealth, currHealth, maxAP, currAP, id, dmg;
     protected int[] stats;
-    protected ArrayBag<Item>[] inventory;
+    protected ArrayBag<Item> inventory;
     protected Skills[] skills;
-    protected ArrayBag<Perk>[] perks;
+    protected ArrayBag<Perk> perks;
     public static final int STR=0, INTL=1, LUCK=2, PERC=3, AGIL=4, ATK=5, DEF=6;
     
     

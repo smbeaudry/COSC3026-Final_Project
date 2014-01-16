@@ -24,6 +24,14 @@ public class Room {
         roomType = null;
     }
     
+    public Room(Room neighbour, int direction){
+        visited = false;
+        neighbours = new Room[4];
+        neighbours[direction] = neighbour;
+        doors = new boolean[4];
+        roomType = null;
+    }
+    
     public Room(Room[] neighbours, boolean[] doors, String roomType)
     {
         visited = false;
@@ -63,6 +71,22 @@ public class Room {
     
     public Room getNeighbour(int index){
         return neighbours[index];
+    }
+    
+    /**
+     * checks the Room for empty neighbouring spaces, if some are found the
+     * direction of the last empty space found is returned.
+     * 
+     * @return the direction of the last empty space. -1 if not found.
+     */
+    public int hasEmptyNeighbour(){
+        int result = -1;
+        for(int i = 0; i < 4; i++){
+            if(neighbours[i] == null){
+                result = i;
+            }
+        }
+        return result;
     }
     
     public boolean hasDoor(int index){

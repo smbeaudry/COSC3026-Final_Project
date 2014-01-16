@@ -108,10 +108,10 @@ public class BinaryTreeNode<E extends Comparable<E>> {
 	 */
 	public boolean add(BinaryTreeNode<E> newNode){
 		int comp = (data.compareTo(newNode.data)); // compare the data 
-                of the old node to the new node.
+                                              //of the old node to the new node.
 		
 		if(comp > 0){ //The new node's data is less than the current 
-                    node.
+                              //node.
 			if(left != null){
 				return left.add(newNode);
 			}
@@ -166,7 +166,7 @@ public class BinaryTreeNode<E extends Comparable<E>> {
 	 */
 	public boolean search(E keyData){
 	int comp = (data.compareTo(keyData)); // compare the data to the current
-        data's node
+                                                //data's node
 		
 		if(comp == 0){
 			return true;
@@ -195,7 +195,7 @@ public class BinaryTreeNode<E extends Comparable<E>> {
 	 */
 	public BinaryTreeNode<E> findClosestTo(E keyData){
 	int comp = (data.compareTo(keyData)); // compare the data to the current
-        data's node
+                                                //data's node
 		
 		if(comp > 0){
 			if(left != null){

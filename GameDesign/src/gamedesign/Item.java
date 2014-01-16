@@ -17,7 +17,8 @@ public class Item
     
     protected String name, statAffected;
     protected String description;
-    protected boolean isEquipable, isConsumable, isThrowable;
+    protected boolean isEquipable, isEquipped, isConsumable, isThrowable;
+    protected int statChange;
     
     /**
      * Default constructor
@@ -31,6 +32,8 @@ public class Item
         isEquipable = false;
         isConsumable = false;
         isThrowable = true;
+        statChange = 0;
+        isEquipped = false;
     }
     
     /**
@@ -40,15 +43,20 @@ public class Item
      * @param isEquipable If the item can be worn
      * @param isConsumable If the item can be consumed
      * @param isThrowable If the item can be thrown (possibly always true)
+     * @param sChange the value the item effect will change the stat by
+     * @param equipped is a boolean of if the item is equipped
      */
     public Item(String name, String statAffected, boolean isEquipable,
-            boolean isConsumable, boolean isThrowable)
+            boolean isConsumable, boolean isThrowable, int sChange,
+            boolean equipped)
     {
         this.name = name;
         this.statAffected = statAffected;
         this.isEquipable = isEquipable;
         this.isConsumable = isConsumable;
         this.isThrowable = isThrowable;
+        this.statChange = sChange;
+        this.isEquipped = equipped;
     }
     
      /**
@@ -57,15 +65,19 @@ public class Item
      * @param statAffected The stat affected by the item (possibly array)
      * @param isEquipable If the item can be worn
      * @param isConsumable If the item can be consumed
+     * @param sChange the value the item effect will change the stat by
+     * @param equipped is a boolean of if the item is equipped
      */
     public Item(String name, String statAffected, boolean isEquipable,
-            boolean isConsumable)
+            boolean isConsumable, int sChange, boolean equipped)
     {
         this.name = name;
         this.statAffected = statAffected;
         this.isEquipable = isEquipable;
         this.isConsumable = isConsumable;
         this.isThrowable = true;
+        this.statChange = sChange;
+        this.isEquipped = equipped;
     }
     //Mutators
     /**
@@ -86,9 +98,9 @@ public class Item
     }
     /**
      * Sets if the item can be worn
-     * @param isEquipable If the item can be worn
+     * @param isEquipable if the item can be worn
      */
-    public void isEquipable(boolean isEquipable)
+    public void setIsEquipable(boolean isEquipable)
     {
         this.isEquipable = isEquipable;
     }
@@ -96,7 +108,7 @@ public class Item
      * Sets if the item can be consumed
      * @param isConsumable If the item can be consumed
      */
-    public void isConsumable(boolean isConsumable)
+    public void setIsConsumable(boolean isConsumable)
     {
         this.isConsumable = isConsumable;
     }
@@ -104,9 +116,25 @@ public class Item
      * Sets if the item can be thrown (possibly always)
      * @param isThrowable If the item can be thrown
      */
-    public void isThrowable(boolean isThrowable)
+    public void setIsThrowable(boolean isThrowable)
     {
         this.isThrowable = isThrowable;
+    }
+    
+    /**
+     * Sets if the item is currently equipped
+     * @param equipped 
+     */
+    public void setIsEquipped(boolean equipped){
+        this.isEquipped = equipped;
+    }
+    
+    /**
+     * Sets the value the affected stat will be changed by
+     * @param sChange is the new value of change
+     */
+    public void setStatChange(int sChange){
+        this.statChange = sChange;
     }
     
     //Accessors
@@ -119,7 +147,7 @@ public class Item
         return name;
     }
     /**
-     * Retunrs the stat affected
+     * Returns the stat affected
      * @return A string for the stat affected
      */
     public String getStatAffected()
@@ -150,4 +178,21 @@ public class Item
     {
         return isThrowable;
     }
+    
+    /**
+     * Returns if the item is equipped
+     * @return  A boolean value for equipped status
+     */
+    public boolean isEquipped(){
+        return isEquipped;
+    }
+    
+    /**
+     * Returns the value of the stat change
+     * @return the value of the stat change
+     */
+    public int getStatChange(){
+        return statChange;
+    }
+    
 }

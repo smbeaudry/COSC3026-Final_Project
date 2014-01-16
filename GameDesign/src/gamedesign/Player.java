@@ -79,6 +79,11 @@ public class Player extends Perk{
         return dmg;
     }
     
+    /**
+     * This method creates the default Perks for the player. This method will
+     * be run in the player's constructor
+     * @return An ArrayBag<Perk> of the player's default perks
+     */
     public ArrayBag<Perk> createPerks(){
        
         ArrayBag<Perk> default_perks = new ArrayBag<Perk>();
@@ -89,6 +94,11 @@ public class Player extends Perk{
         return default_perks;
     }
     
+    /**
+     * This method creates the default inventory for the player. This method 
+     * will be run in the player's constructor
+     * @return An ArrayBag<Item> of the player's default items
+     */
     public ArrayBag<Item> createInventory(){
         ArrayBag<Item> default_inventory = new ArrayBag<Item>();
         Item testItem = new Item();

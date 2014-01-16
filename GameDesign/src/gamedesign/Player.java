@@ -14,7 +14,8 @@ import java.util.ArrayList;
 public class Player extends Perk{
     
     protected int maxHealth, currHealth, maxAP, currAP, id, dmg;
-    protected int[] stats;
+    protected int[] base_stats; //starting/level up stats of player
+    protected int[] working_stats; //stats after item/perk bonuses
     protected ArrayList<Item> inventory;
     protected Skills[] skills;
     protected ArrayList<Perk> perks;
@@ -27,11 +28,14 @@ public class Player extends Perk{
         currHealth = maxHealth;
         maxAP = 1;
         currAP = 1;
-        stats = new int[7];
-        for(int i = 0; i <= stats.length; i++)
+        base_stats = new int[7];
+        working_stats = new int[7];
+        for(int i = 0; i <= base_stats.length; i++)
         {
-            stats[i] = 1;
+            base_stats[i] = 1;
         }
+        //System.arraycopy(src, start_indx_from, des, start_indx_to, cp_length);
+        System.arraycopy(base_stats, 0, working_stats, 0, base_stats.length);
         
         perks = createPerks();
         inventory = createInventory();
@@ -108,8 +112,74 @@ public class Player extends Perk{
         return default_inventory;
     }
     
-    public int calculateAttack(){
-        return 0;
+    public void recalculateStats(){
+        int old_strength = base_stats[STR];
+        int new_strength = old_strength;
+        
+        int old_intelligence = base_stats[INTL];
+        int new_intelligence = old_intelligence;
+        
+        int old_luck = base_stats[LUCK];
+        int new_luck = old_luck;
+        
+        int old_perception = base_stats[PERC];
+        int new_perception = old_perception;
+        
+        int old_agility = base_stats[AGIL];
+        int new_agility = old_agility;
+        
+        //strength loop check
+        for(int i = 0; i < perks.size(); ++i){
+            if(perks.get(i).getAttribute().equals("strength") && 
+               perks.get(i).getEnabled()){
+                
+               new_strength += perks.get(i).getStatChange();
+            }
+        }
+        
+        //intelligence loop check
+        for(int i = 0; i < perks.size(); ++i){
+            if(perks.get(i).getAttribute().equals("intelligence") && 
+               perks.get(i).getEnabled()){
+                
+               new_intelligence += perks.get(i).getStatChange();
+            }
+        } 
+        
+        //luck loop check
+        for(int i = 0; i < perks.size(); ++i){
+            if(perks.get(i).getAttribute().equals("luck") && 
+               perks.get(i).getEnabled()){
+                
+               new_luck += perks.get(i).getStatChange();
+            }
+        }
+        
+        //perception loop check
+        for(int i = 0; i < perks.size(); ++i){
+            if(perks.get(i).getAttribute().equals("perception") && 
+               perks.get(i).getEnabled()){
+                
+               new_perception += perks.get(i).getStatChange();
+            }
+        }
+        
+        //agility loop check
+        for(int i = 0; i < perks.size(); ++i){
+            if(perks.get(i).getAttribute().equals("agility") && 
+               perks.get(i).getEnabled()){
+                
+               new_agility += perks.get(i).getStatChange();
+            }
+        }
+        
+        working_stats[STR] = new_strength;
+        working_stats[INTL] = new_intelligence;
+        working_stats[LUCK] = new_luck;
+        working_stats[PERC] = new_perception;
+        working_stats[AGIL] = new_agility;
+        
+        //ATTACK and DEFENSE will be recalculated here based on the new stats
     }
 }
 

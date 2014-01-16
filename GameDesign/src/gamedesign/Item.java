@@ -41,8 +41,8 @@ public class Item
      * @param isConsumable If the item can be consumed
      * @param isThrowable If the item can be thrown (possibly always true)
      */
-    public Item(String name, String statAffected, boolean isThrowable,
-            boolean isEquipable, boolean isConsumable)
+    public Item(String name, String statAffected, boolean isEquipable,
+            boolean isConsumable, boolean isThrowable)
     {
         this.name = name;
         this.statAffected = statAffected;
@@ -51,6 +51,22 @@ public class Item
         this.isThrowable = isThrowable;
     }
     
+     /**
+     * Creates custom items available to players throughout the game
+     * @param name The name of the item
+     * @param statAffected The stat affected by the item (possibly array)
+     * @param isEquipable If the item can be worn
+     * @param isConsumable If the item can be consumed
+     */
+    public Item(String name, String statAffected, boolean isEquipable,
+            boolean isConsumable)
+    {
+        this.name = name;
+        this.statAffected = statAffected;
+        this.isEquipable = isEquipable;
+        this.isConsumable = isConsumable;
+        this.isThrowable = true;
+    }
     //Mutators
     /**
      * Sets item name

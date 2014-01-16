@@ -144,7 +144,7 @@ public class Player extends Perk{
                 
                new_intelligence += perks.get(i).getStatChange();
             }
-        } 
+        }
         
         //luck loop check
         for(int i = 0; i < perks.size(); ++i){
@@ -180,6 +180,16 @@ public class Player extends Perk{
         working_stats[AGIL] = new_agility;
         
         //ATTACK and DEFENSE will be recalculated here based on the new stats
+    }
+    
+    public void consumeItem(Item item){
+        if(item.isConsumable()){
+            
+        }
+    }
+    
+    public void throwItem(Item item){
+        
     }
 }
 

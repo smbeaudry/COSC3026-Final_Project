@@ -33,6 +33,7 @@ public class Player extends Perk{
         }
         
         perks = createPerks();
+        inventory = createInventory();
         //inventory[0] = rulebook
         
         //may need more work
@@ -86,5 +87,13 @@ public class Player extends Perk{
         
         
         return default_perks;
+    }
+    
+    public ArrayBag<Item> createInventory(){
+        ArrayBag<Item> default_inventory = new ArrayBag<Item>();
+        Item testItem = new Item();
+        default_inventory.add(testItem);
+        
+        return default_inventory;
     }
 }

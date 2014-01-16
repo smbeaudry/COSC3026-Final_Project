@@ -7,9 +7,10 @@
 package gamedesign;
 
 /**
- * This class creates a generic Binary Tree Node.  The node itself holds data of type E, and 
- * the reference to two more Binary Tree Nodes (Left and Right).  It also implements many recursive
- * methods to add nodes, find the height of the tree from this node down, accessors, mutators, etc.
+ * This class creates a generic Binary Tree Node.  The node itself holds data of
+ * type E, and  * the reference to two more Binary Tree Nodes (Left and Right).
+ * It also implements many recursive * methods to add nodes, find the height of 
+ * the tree from this node down, accessors, mutators, etc.
  * @author Ryan Trudeau, student ID 0296506
  *
  * @param <E> is the generic data type for the node's data.
@@ -24,12 +25,15 @@ public class BinaryTreeNode<E extends Comparable<E>> {
 	//Constructor(s)
 	
 	/**
-	 * This fully argumented constructor initializes the Binary Tree Node's data fields with no error checking.
+	 * This fully argumented constructor initializes the Binary Tree Node's
+         * data fields with no error checking.
 	 * @param leftNode is input to initialize the BTN's left node datafield
-	 * @param rightNode is input to initialize the BTN's right node datafield
+	 * @param rightNode is input to initialize the BTN's right node 
+         * datafield
 	 * @param nodeData is the input to initialize the data for the node.
 	 */
-	public BinaryTreeNode(BinaryTreeNode<E> leftNode, BinaryTreeNode<E> rightNode, E nodeData){
+	public BinaryTreeNode(BinaryTreeNode<E> leftNode, BinaryTreeNode<E> 
+                rightNode, E nodeData){
 	left = leftNode;
 	right = rightNode;
 	data = nodeData;

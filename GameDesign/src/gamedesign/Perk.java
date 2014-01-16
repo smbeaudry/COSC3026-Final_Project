@@ -7,7 +7,8 @@
 package gamedesign;
 
 /**
- *
+ * This class sets the basic datafields, and methods required for each
+ * 'perk' object to be used by the Player class.
  * @author Ryan Trudeau
  * Class to create perks to add bonuses for players
  */

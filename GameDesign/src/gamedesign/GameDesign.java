@@ -42,6 +42,12 @@ public class GameDesign {
         int maxRooms = randNumber.nextInt(60) + 1;
         //Map maximum size
         map = new Room[10][10];
+        /*
+        We could have the start room spawn anywhere except the edges
+        Code would look like:
+            centerX = (int)((Math.random() * 59) + 1);
+            centerY = (int)((Math.random() * 59) + 1);
+        */
         int centerX = map.length / 2;
         int centerY = map[0].length / 2;
         //create and place center room

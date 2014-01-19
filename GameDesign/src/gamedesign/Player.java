@@ -14,14 +14,17 @@ import java.util.ArrayList;
 public class Player extends Perk{
     
     protected int maxHealth, currHealth, maxAP, currAP, id, dmg;
+    protected int playerX, playerY; // XandY coordinates of player
     protected int[] base_stats; //starting/level up stats of player
     protected int[] working_stats; //stats after item/perk bonuses
     protected ArrayList<Item> inventory;
-    protected Skills[] skills;
+    //protected Skills[] skills;
     protected ArrayList<Perk> perks;
     public static final int STR=0, INTL=1, LUCK=2, PERC=3, AGIL=4, ATK=5, DEF=6;
     
-    
+    /**
+     * Default player constructor
+     */
     public Player()
     {
         maxHealth = 10;
@@ -44,41 +47,121 @@ public class Player extends Perk{
         //may need more work
     }
     
+    /**
+     * Player constructor with parameters
+     * Have to add all the other parameters
+     * @param playerX The X value of the player's position on the board
+     * @param playerY The Y value of the player's position on the board
+     */
+    public Player(int playerX, int playerY)
+    {
+        this.playerX = playerX;
+        this.playerY = playerY;
+    }
+    
     //Mutators
+    /**
+     * Mutator to move the player along the Xaxis
+     * @param playerX Player's new X coordinate
+     */
+    public void moveX(int playerX)
+    {
+        this.playerX = playerX;
+    }
+    /**
+     * Mutator to move the player along the Yaxis
+     * @param playerY The player's new Y coordinate
+     */
+    public void moveY(int playerY)
+    {
+        this.playerY = playerY;
+    }
+    /**
+     * Mutator for adjusting a player's maximum health
+     * @param maxHealth The new value for the player's max health
+     */
     public void setMaxHP(int maxHealth)
     {
         this.maxHealth = maxHealth;
     }
+    /**
+     * Mutator for bringing a player's health back up to a certain point
+     * @param currHealth The new value of the player's current health
+     */
     public void setHP(int currHealth)
     {
         this.currHealth = currHealth;
     }
+    /**
+     * Mutator for when a player heals 
+     * @param health How much the player healed by
+     */
     public void healing(int health)
     {
         this.currHealth+= health;
     }
     
     //Accessors
+    /**
+     * Accessor for player's X coordinate
+     * @return Player's X coordinate
+     */
+    public int getX()
+    {
+        return playerX;
+    }
+    /**
+     * Accessor for player's Y coordinate
+     * @return Player's Y coordinate
+     */
+    public int getY()
+    {
+        return playerY;
+    }
+    /**
+     * Accessor for player's max health
+     * @return Player's max health
+     */
     public int getMaxHP()
     {
         return maxHealth;
     }
+    /**
+     * Accessor for player's current health
+     * @return Player's current health
+     */
     public int getHP()
     {
         return currHealth;
     }
+    /**
+     * Accessor for player's max AP
+     * @return Player's max AP
+     */
     public int getMaxAP()
     {
         return maxAP;
     }
+    /**
+     * Accessor for player's current AP
+     * @return Player's current AP
+     */
     public int getAP()
     {
         return currAP;
     }
+    /**
+     * Accessor for player ID
+     * @return Player ID
+     */
     public int getID()
     {
         return id;
     }
+    /**
+     * Accessor for DMG
+     * @return Player DMG stat
+     */
     public int getDMG()
     {
         return dmg;

@@ -30,7 +30,7 @@ public class Player extends Perk{
         maxHealth = 10;
         currHealth = maxHealth;
         maxAP = 1;
-        currAP = 1;
+        currAP = maxAP;
         base_stats = new int[7];
         working_stats = new int[7];
         for(int i = 0; i <= base_stats.length; i++)
@@ -52,9 +52,19 @@ public class Player extends Perk{
      * Have to add all the other parameters
      * @param playerX The X value of the player's position on the board
      * @param playerY The Y value of the player's position on the board
+     * @param base_stats The base stats of the player during creation
      */
-    public Player(int playerX, int playerY)
+    public Player(int playerX, int playerY, int[] base_stats)
     {
+        maxHealth = 10;
+        currHealth = maxHealth;
+        
+        for(int i = 0; i<=base_stats.length; i++)
+        {
+            this.base_stats[i] = base_stats[i];
+            working_stats[i] = base_stats[i];
+            //working stats are the same as base stats to begin
+        }
         this.playerX = playerX;
         this.playerY = playerY;
     }

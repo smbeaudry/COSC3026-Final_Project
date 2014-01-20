@@ -15,6 +15,7 @@ public class Room {
     protected Room[] neighbours;
     protected boolean[] doors;
     protected String roomType; //used for room graphic
+    protected int[] location; //used for map creation
     public static final int NORTH = 0, WEST = 1, SOUTH = 2, EAST = 3;
     
     public Room(){
@@ -22,6 +23,7 @@ public class Room {
         neighbours = new Room[4];
         doors = new boolean[4];
         roomType = null;
+        location = new int[2];
     }
     
     public Room(Room neighbour, int direction){
@@ -30,6 +32,7 @@ public class Room {
         neighbours[direction] = neighbour;
         doors = new boolean[4];
         roomType = null;
+        location = new int[2];
     }
     
     /**
@@ -53,6 +56,7 @@ public class Room {
         for(int i = 0; i <= doors.length; i++)
             this.doors[i] = doors[i];
         this.roomType = roomType;
+        this.location = new int[2];
     }
     
     /**
@@ -86,6 +90,24 @@ public class Room {
      */
     public boolean isVisited(){
         return this.visited;
+    }
+    
+    /** 
+     * Sets the value of the location in the map array
+     * @param x x axis location
+     * @param y y axis location
+     */
+    public void setLocation(int x, int y){
+        location[0] = x;
+        location[1] = y;
+    }
+    
+    /**
+     * Gets the location of the current room on the map
+     * @return array containing the location
+     */
+    public int[] getLocation(){
+        return location;
     }
     
     /**

@@ -24,6 +24,7 @@ public class GameDesign {
     public static void main(String[] args) {
         randNumber = new Random();
         
+        GUI.main(null); //runs the main in the GUI
     }
     
     /**

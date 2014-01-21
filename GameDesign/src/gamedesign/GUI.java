@@ -177,6 +177,7 @@ public class GUI extends javax.swing.JFrame {
                 availableRooms.add(tempRoom);
             }
         }
+        createDoors();
     }
     
     /**
@@ -197,6 +198,19 @@ public class GUI extends javax.swing.JFrame {
         }
         if(tempInt[1] == map[0].length - 1){
             roomToCheck.setNeighbour(Room.SOUTH, new Room());
+        }
+    }
+    
+    /**
+     * Loops through the map and creates the doors for every room
+     */
+    public void createDoors(){
+        for(int i = 0; i < map.length; ++i){
+            for(int j = 0; j < map[i].length; ++i){
+                if(map[i][j] != null){
+                    map[i][j].createDoors();
+                }
+            }
         }
     }
     

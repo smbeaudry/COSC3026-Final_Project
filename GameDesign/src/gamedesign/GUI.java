@@ -27,7 +27,17 @@ public class GUI extends javax.swing.JFrame {
         initComponents();
         
         //<label>.setIcon(new javax.swing.ImageIcon(getClass().getResource("./gamedesign/assets/dun_wall_0.png")));
-
+        shuffleMap(1, "test");
+        for(int i = 0; i < map.length; i++){
+            for(int j = 0; j < map[0].length; j++){
+                if(map[i][j] != null){
+                    System.out.print(map[i][j] + "\t");
+                } else {
+                    System.out.print("   \t");
+                }
+            }
+            System.out.println();
+        }
     }
 
     /**
@@ -69,48 +79,78 @@ public class GUI extends javax.swing.JFrame {
         
         //Create and place the four rooms connecting to the center room
         int x = firstX, y = firstY;
+        ArrayBag<Room> availableRooms = new ArrayBag<>(10, randNumber);
         
         room.setNeighbour(Room.NORTH, new Room(map[x][y], Room.SOUTH, x, y - 1));
         map[x][y - 1] = room.getNeighbour(Room.NORTH);
+        availableRooms.add(room.getNeighbour(Room.NORTH));
         
         room.setNeighbour(Room.WEST, new Room(map[x][y], Room.EAST, x - 1, y));
         map[x - 1][y] = room.getNeighbour(Room.WEST);
+        availableRooms.add(room.getNeighbour(Room.WEST));
         
         room.setNeighbour(Room.SOUTH, new Room(map[x][y], Room.NORTH, x, y + 1));
         map[x][y + 1] = room.getNeighbour(Room.SOUTH);
+        availableRooms.add(room.getNeighbour(Room.SOUTH));
         
         room.setNeighbour(Room.EAST, new Room(map[x][y], Room.WEST, x + 1, y));
         map[x + 1][y] = room.getNeighbour(Room.EAST);
+        availableRooms.add(room.getNeighbour(Room.EAST));
         
         //5 rooms were already created
         int dir1, dir2;
         for(int i = 4; i < maxRooms; i++){
             int rand = randNumber.nextInt(4);
-            if(map[x][y].hasEmptyNeighbour() > -1){
-                while(map[x][y].getNeighbour(rand) != null){
-                    rand = randNumber.nextInt(4);
-                }
-                if(rand % 4 == Room.NORTH){
-                    dir1 = Room.NORTH;
-                    dir2 = Room.SOUTH;
+            Room tempRoom = availableRooms.grab();
+            int[] tempInt = tempRoom.getLocation();
+            x = tempInt[0];
+            y = tempInt[1];
+            while(map[x][y].getNeighbour(rand) != null){
+                rand = randNumber.nextInt(4);
+            }
+            if(rand % 4 == Room.NORTH){
+                dir1 = Room.NORTH;
+                dir2 = Room.SOUTH;
+                if(map[x][y - 1] == null){
                     map[x][y].setNeighbour(dir1, new Room(map[x][y], dir2, x, y - 1));
                     map[x][y - 1] = map[x][y].getNeighbour(dir1);
-                } else if (rand % 4 == Room.SOUTH){
-                    dir1 = Room.SOUTH;
-                    dir2 = Room.NORTH;
+                    availableRooms.add(map[x][y].getNeighbour(dir1));
+                } else {
+                    map[x][y].setNeighbour(dir1, map[x][y - 1]);
+                }
+            } else if (rand % 4 == Room.SOUTH){
+                dir1 = Room.SOUTH;
+                dir2 = Room.NORTH;
+                if(map[x][y + 1] == null){
                     map[x][y].setNeighbour(dir1, new Room(map[x][y], dir2, x, y + 1));
                     map[x][y + 1] = map[x][y].getNeighbour(dir1);
-                } else if (rand % 4 == Room.EAST){
-                    dir1 = Room.EAST;
-                    dir2 = Room.WEST;
+                    availableRooms.add(map[x][y].getNeighbour(dir1));
+                } else {
+                    map[x][y].setNeighbour(dir1, map[x][y + 1]);
+                }
+            } else if (rand % 4 == Room.EAST){
+                dir1 = Room.EAST;
+                dir2 = Room.WEST;
+                if(map[x + 1][y] == null){
                     map[x][y].setNeighbour(dir1, new Room(map[x][y], dir2, x + 1, y));
                     map[x + 1][y] = map[x][y].getNeighbour(dir1);
+                    availableRooms.add(map[x][y].getNeighbour(dir1));
                 } else {
-                    dir1 = Room.WEST;
-                    dir2 = Room.EAST;
+                    map[x][y].setNeighbour(dir1, map[x + 1][y]);
+                }
+            } else {
+                dir1 = Room.WEST;
+                dir2 = Room.EAST;
+                if(map[x - 1][y] == null){
                     map[x][y].setNeighbour(dir1, new Room(map[x][y], dir2, x - 1, y));
                     map[x - 1][y] = map[x][y].getNeighbour(dir1);
+                    availableRooms.add(map[x][y].getNeighbour(dir1));
+                } else {
+                    map[x][y].setNeighbour(dir1, map[x - 1][y]);
                 }
+            }
+            if(tempRoom.hasEmptyNeighbour() > -1){
+                availableRooms.add(tempRoom);
             }
         }
     }

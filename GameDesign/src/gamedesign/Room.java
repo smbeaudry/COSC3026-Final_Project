@@ -23,7 +23,7 @@ public class Room {
         neighbours = new Room[4];
         doors = new boolean[4];
         roomType = null;
-        location = new int[2];
+        location = null;
     }
     
     public Room(Room neighbour, int direction, int x, int y){
@@ -138,7 +138,7 @@ public class Room {
      */
     public int hasEmptyNeighbour(){
         int result = -1;
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 4; ++i){
             if(neighbours[i] == null){
                 result = i;
             }
@@ -153,6 +153,19 @@ public class Room {
      */
     public boolean hasDoor(int index){
         return doors[index];
+    }
+    
+    /**
+     * Checks neighbours to see if a door should be added or not
+     */
+    public void createDoors(){
+        for(int i = 0; i < neighbours.length; ++i){
+            if(neighbours[i] != null){
+                if(neighbours[i].getLocation() != null){
+                    doors[i] = true;
+                }
+            }
+        }
     }
     
     /**

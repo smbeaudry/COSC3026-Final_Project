@@ -154,4 +154,13 @@ public class Room {
     public boolean hasDoor(int index){
         return doors[index];
     }
+    
+    /**
+     * String representation of a Room
+     * 
+     * @return String to represent room
+     */
+    public String toString(){
+        return location[0] + "," + location[1];
+    }
 }

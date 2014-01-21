@@ -26,13 +26,15 @@ public class Room {
         location = new int[2];
     }
     
-    public Room(Room neighbour, int direction){
+    public Room(Room neighbour, int direction, int x, int y){
         visited = false;
         neighbours = new Room[4];
         neighbours[direction] = neighbour;
         doors = new boolean[4];
         roomType = null;
         location = new int[2];
+        location[0] = x;
+        location[1] = y;
     }
     
     /**

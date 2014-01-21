@@ -23,6 +23,8 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
+        
+        
     }
 
     /**
@@ -65,16 +67,16 @@ public class GUI extends javax.swing.JFrame {
         //Create and place the four rooms connecting to the center room
         int x = firstX, y = firstY;
         
-        room.setNeighbour(Room.NORTH, new Room(map[x][y], Room.SOUTH));
+        room.setNeighbour(Room.NORTH, new Room(map[x][y], Room.SOUTH, x, y - 1));
         map[x][y - 1] = room.getNeighbour(Room.NORTH);
         
-        room.setNeighbour(Room.WEST, new Room(map[x][y], Room.EAST));
+        room.setNeighbour(Room.WEST, new Room(map[x][y], Room.EAST, x - 1, y));
         map[x - 1][y] = room.getNeighbour(Room.WEST);
         
-        room.setNeighbour(Room.SOUTH, new Room(map[x][y], Room.NORTH));
+        room.setNeighbour(Room.SOUTH, new Room(map[x][y], Room.NORTH, x, y + 1));
         map[x][y + 1] = room.getNeighbour(Room.SOUTH);
         
-        room.setNeighbour(Room.EAST, new Room(map[x][y], Room.WEST));
+        room.setNeighbour(Room.EAST, new Room(map[x][y], Room.WEST, x + 1, y));
         map[x + 1][y] = room.getNeighbour(Room.EAST);
         
         //5 rooms were already created
@@ -88,22 +90,22 @@ public class GUI extends javax.swing.JFrame {
                 if(rand % 4 == Room.NORTH){
                     dir1 = Room.NORTH;
                     dir2 = Room.SOUTH;
-                    map[x][y].setNeighbour(dir1, new Room(map[x][y], dir2));
+                    map[x][y].setNeighbour(dir1, new Room(map[x][y], dir2, x, y - 1));
                     map[x][y - 1] = map[x][y].getNeighbour(dir1);
                 } else if (rand % 4 == Room.SOUTH){
                     dir1 = Room.SOUTH;
                     dir2 = Room.NORTH;
-                    map[x][y].setNeighbour(dir1, new Room(map[x][y], dir2));
+                    map[x][y].setNeighbour(dir1, new Room(map[x][y], dir2, x, y + 1));
                     map[x][y + 1] = map[x][y].getNeighbour(dir1);
                 } else if (rand % 4 == Room.EAST){
                     dir1 = Room.EAST;
                     dir2 = Room.WEST;
-                    map[x][y].setNeighbour(dir1, new Room(map[x][y], dir2));
+                    map[x][y].setNeighbour(dir1, new Room(map[x][y], dir2, x + 1, y));
                     map[x + 1][y] = map[x][y].getNeighbour(dir1);
                 } else {
                     dir1 = Room.WEST;
                     dir2 = Room.EAST;
-                    map[x][y].setNeighbour(dir1, new Room(map[x][y], dir2));
+                    map[x][y].setNeighbour(dir1, new Room(map[x][y], dir2, x - 1, y));
                     map[x - 1][y] = map[x][y].getNeighbour(dir1);
                 }
             }

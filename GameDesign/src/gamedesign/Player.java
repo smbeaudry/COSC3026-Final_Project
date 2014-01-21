@@ -41,7 +41,7 @@ public class Player extends Perk{
         System.arraycopy(base_stats, 0, working_stats, 0, base_stats.length);
         
         perks = createPerks();
-        inventory = createInventory();
+        //inventory = createInventory();
         //inventory[0] = rulebook
         
         //may need more work

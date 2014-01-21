@@ -28,7 +28,8 @@ package gamedesign;
 * modified by: Luc Breault
 * modified by ID: MYSTERYYYYYY
 ******************************************************************************/
-public class ArrayBag<O> implements Cloneable
+import java.util.Random;
+public class ArrayBag<E> implements Cloneable
 {
    // Invariant of the ArrayBag class:
    //   1. The number of elements in the bag is in the instance variable 
@@ -39,6 +40,7 @@ public class ArrayBag<O> implements Cloneable
    //      rest of data.
    private Object[] data;
    private int manyItems; 
+   private Random randNum;
    
    /**
    * Initialize an empty bag with an initial capacity of 10.  Note that the
@@ -53,7 +55,7 @@ public class ArrayBag<O> implements Cloneable
    **/   
    public ArrayBag( )
    {
-      this(10);
+      this(10, new Random());
    }
      
 
@@ -72,13 +74,14 @@ public class ArrayBag<O> implements Cloneable
    * @exception OutOfMemoryError
    *   Indicates insufficient memory for: new Object[initialCapacity].
    **/   
-   public ArrayBag(int initialCapacity)
+   public ArrayBag(int initialCapacity, Random rand)
    {
       if (initialCapacity < 0)
          throw new IllegalArgumentException
          ("The initialCapacity is negative: " + initialCapacity);
       data = new Object[initialCapacity];
       manyItems = 0;
+      randNum = rand;
    }
         
  
@@ -97,70 +100,26 @@ public class ArrayBag<O> implements Cloneable
    *   Integer.MAX_VALUE will cause the bag to fail with an
    *   arithmetic overflow.
    **/
-   public void add(O element)
+   public void add(E element)
    {
       if (manyItems == data.length)
       {  // Ensure twice as much space as we need.
          ensureCapacity((manyItems + 1)*2);
       }
-
-      data[manyItems] = element;
-      manyItems++;
-   }
-
-
-   /**
-   * Add new elements to this bag. If the new elements would take this
-   * bag beyond its current capacity, then the capacity is increased
-   * before adding the new elements.
-   * @param elements
-   *   (a variable-arity argument)
-   *   one or more new elements that are being inserted
-   * @postcondition
-   *   A new copy of the element has been added to this bag.
-   * @exception OutOfMemoryError
-   *   Indicates insufficient memory for increasing the bag's capacity.
-   * @note
-   *   An attempt to increase the capacity beyond
-   *   Integer.MAX_VALUE will cause the bag to fail with an
-   *   arithmetic overflow.
-   **/
-   public void addMany(O... elements)
-   {
-      if (manyItems + elements.length > data.length)
-      {  // Ensure twice as much space as we need.
-         ensureCapacity((manyItems + elements.length)*2);
-      }
-
-      System.arraycopy(elements, 0, data, manyItems, elements.length);
-      manyItems += elements.length;
-   }
-
-
-   
-
-   /**
-   * Accessor method to count the number of occurrences of a particular element
-   * in this bag.
-   * @param target
-   *   the element that needs to be counted
-   * @return
-   *   the number of times that target occurs in this bag
-   **/
-   public int countOccurrences(O target)
-   {
-      int answer;
       int index;
+      for (index = 0; (index < manyItems) && (element != data[index]); index++){
+        // No work is needed in the body of this for-loop.
+      }
+         
+      if (index == manyItems){
+        // The target was not found, so add the item
+        data[manyItems] = element;
+        manyItems++;
+      }
       
-      answer = 0;
-      for (index = 0; index < manyItems; index++)
-         if (target.equals(data[index]))
-            answer++;
-      return answer;
    }
 
-
-   /**
+  /**
    * Change the current capacity of this bag.
    * @param minimumCapacity
    *   the new capacity for this bag
@@ -182,7 +141,6 @@ public class ArrayBag<O> implements Cloneable
          data = biggerArray;
       }
    }
-
    
    /**
    * Accessor method to get the current capacity of this bag. 
@@ -197,40 +155,6 @@ public class ArrayBag<O> implements Cloneable
       return data.length;
    }
 
-              
-   /**
-   * Remove one copy of a specified element from this bag.
-   * @param target
-   *   the element to remove from the bag
-   * @postcondition
-   *   If target was found in the bag, then one copy of
-   *   target has been removed and the method returns true. 
-   *   Otherwise the bag remains unchanged and the method returns false. 
-   **/
-   public boolean remove(O target)
-   {
-      int index; // The location of target in the data array.
-       
-      // First, set index to the location of target in the data array,
-      // which could be as small as 0 or as large as manyItems-1; If target
-      // is not in the array, then index will be set equal to manyItems;
-      for (index = 0; (index < manyItems) && (!target.equals(data[index])); index++)
-         // No work is needed in the body of this for-loop.
-         ;
-         
-      if (index == manyItems)
-         // The target was not found, so nothing is removed.
-         return false;
-      else
-      {  // The target was found at data[index].
-         // So reduce manyItems by 1 and copy the last element onto data[index].
-         manyItems--;
-         data[index] = data[manyItems];
-         return true;
-      }
-   }
-                 
-   
    /**
    * Determine the number of elements in this bag.
    * @param - none
@@ -241,8 +165,7 @@ public class ArrayBag<O> implements Cloneable
    {
       return manyItems;
    }
-   
-   
+  
    /**
    * Reduce the current capacity of this bag to its actual size (i.e., the
    * number of elements it contains).
@@ -269,9 +192,12 @@ public class ArrayBag<O> implements Cloneable
     * the elements are un-ordered, a random element is returned.
     * @return a random element from the bag
     */
-   public O grab(){
-	   int element = (int)(Math.random()*manyItems);
-	   return (O)data[element];
+   public E grab(){
+	   int element = randNum.nextInt(manyItems);
+           E result = (E)data[element];
+           manyItems--;
+           data[element] = data[manyItems];
+	   return result;
    }
    
    /**
@@ -299,13 +225,13 @@ public class ArrayBag<O> implements Cloneable
    * @exception OutOfMemoryError
    *   Indicates insufficient memory for creating the clone.
    **/ 
-   public ArrayBag<O> clone()
+   public ArrayBag<E> clone()
    {  // Clone an IntArrayBag object.
-	   ArrayBag<O> answer;
+	   ArrayBag<E> answer;
       
       try
       {
-         answer = (ArrayBag<O>)super.clone();
+         answer = (ArrayBag<E>)super.clone();
       }
       catch (CloneNotSupportedException e)
       {  // This exception should not occur. But if it does, it would probably

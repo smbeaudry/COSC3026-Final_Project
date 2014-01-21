@@ -26,7 +26,9 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
         randNumber = new Random();
-        seed = 1;
+        java.util.Date date = new java.util.Date();
+        seed = date.getTime();
+        //seed = 1;
         //<label>.setIcon(new javax.swing.ImageIcon(getClass().getResource("./gamedesign/assets/dun_wall_0.png")));
         shuffleMap(seed, "test");
         for(int i = 0; i < map.length; i++){
@@ -90,25 +92,25 @@ public class GUI extends javax.swing.JFrame {
         room.setNeighbour(Room.NORTH, addedRoom);
         map[x][y - 1] = room.getNeighbour(Room.NORTH);
         availableRooms.add(room.getNeighbour(Room.NORTH));
-        checkForBorder(addedRoom, addedRoom.getLocation(), maxWidth, maxHeight);
+        checkForBorder(addedRoom, addedRoom.getLocation());
         
         addedRoom = new Room(map[x][y], Room.EAST, x - 1, y);
         room.setNeighbour(Room.WEST, addedRoom);
         map[x - 1][y] = room.getNeighbour(Room.WEST);
         availableRooms.add(room.getNeighbour(Room.WEST));
-        checkForBorder(addedRoom, addedRoom.getLocation(), maxWidth, maxHeight);
+        checkForBorder(addedRoom, addedRoom.getLocation());
         
         addedRoom = new Room(map[x][y], Room.EAST, x , y + 1);
         room.setNeighbour(Room.SOUTH, addedRoom);
         map[x][y + 1] = room.getNeighbour(Room.SOUTH);
         availableRooms.add(room.getNeighbour(Room.SOUTH));
-        checkForBorder(addedRoom, addedRoom.getLocation(), maxWidth, maxHeight);
+        checkForBorder(addedRoom, addedRoom.getLocation());
         
         addedRoom = new Room(map[x][y], Room.WEST, x + 1, y);
         room.setNeighbour(Room.EAST, addedRoom);
         map[x + 1][y] = room.getNeighbour(Room.EAST);
         availableRooms.add(room.getNeighbour(Room.EAST));
-        checkForBorder(addedRoom, addedRoom.getLocation(), maxWidth, maxHeight);
+        checkForBorder(addedRoom, addedRoom.getLocation());
         
         //5 rooms were already created
         int dir1, dir2, rand;
@@ -169,7 +171,7 @@ public class GUI extends javax.swing.JFrame {
                 }
             }
             if(addedRoom != null){
-                checkForBorder(addedRoom, addedRoom.getLocation(), maxWidth, maxHeight);
+                checkForBorder(addedRoom, addedRoom.getLocation());
             }
             if(tempRoom.hasEmptyNeighbour() > -1){
                 availableRooms.add(tempRoom);
@@ -177,17 +179,23 @@ public class GUI extends javax.swing.JFrame {
         }
     }
     
-    public void checkForBorder(Room roomToCheck, int[] tempInt, int maxWidth, int maxHeight){
+    /**
+     * Check the specified room to add a blank room if it is near the edges
+     * 
+     * @param roomToCheck The room that should be checked
+     * @param tempInt The rooms location
+     */
+    public void checkForBorder(Room roomToCheck, int[] tempInt){
         if(tempInt[0] == 0){
             roomToCheck.setNeighbour(Room.WEST, new Room());
         }
         if(tempInt[1] == 0){
             roomToCheck.setNeighbour(Room.NORTH, new Room());
         }
-        if(tempInt[0] == maxWidth - 1){
+        if(tempInt[0] == map.length - 1){
             roomToCheck.setNeighbour(Room.EAST, new Room());
         }
-        if(tempInt[1] == maxHeight - 1){
+        if(tempInt[1] == map[0].length - 1){
             roomToCheck.setNeighbour(Room.SOUTH, new Room());
         }
     }

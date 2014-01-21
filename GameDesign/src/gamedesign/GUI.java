@@ -206,7 +206,7 @@ public class GUI extends javax.swing.JFrame {
      */
     public void createDoors(){
         for(int i = 0; i < map.length; ++i){
-            for(int j = 0; j < map[i].length; ++i){
+            for(int j = 0; j < map[i].length; ++j){
                 if(map[i][j] != null){
                     map[i][j].createDoors();
                 }

@@ -29,7 +29,7 @@ public class Monster{
         maxAP = 1;
         currAP = maxAP;
 
-        inventory = createInventory();
+        //inventory = createInventory();
         //inventory[0] = rulebook
         
         //may need more work

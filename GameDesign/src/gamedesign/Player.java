@@ -197,13 +197,15 @@ public class Player extends Perk{
      * will be run in the player's constructor
      * @return An ArrayBag<Item> of the player's default items
      */
-    public ArrayList<Item> createInventory(){
+    public ArrayList<Item> createInventory(Item[] items){
         ArrayList<Item> default_inventory = new ArrayList<Item>();
-        Item testItem = new Item();
-        default_inventory.add(testItem);
         
+        for(int i = 0; i < items.length; i++)
+        {
+            default_inventory.add(items[i]);
+        }
         return default_inventory;
-    }
+    }   
     
     public void recalculateStats(){
         int old_strength = base_stats[STR];

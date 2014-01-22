@@ -111,31 +111,35 @@ public class GUI extends javax.swing.JFrame {
         int[] tempInt;
         Room addedRoom;
         
+        //adds first room north of the spawn room
         addedRoom = new Room(map[x][y], Room.SOUTH, x, y - 1);
         room.setNeighbour(Room.NORTH, addedRoom);
         map[x][y - 1] = room.getNeighbour(Room.NORTH);
         availableRooms.add(room.getNeighbour(Room.NORTH));
         checkForBorder(addedRoom, addedRoom.getLocation());
         
+        //adds first room west of the spawn room
         addedRoom = new Room(map[x][y], Room.EAST, x - 1, y);
         room.setNeighbour(Room.WEST, addedRoom);
         map[x - 1][y] = room.getNeighbour(Room.WEST);
         availableRooms.add(room.getNeighbour(Room.WEST));
         checkForBorder(addedRoom, addedRoom.getLocation());
         
+        //adds first room south of the spawn room
         addedRoom = new Room(map[x][y], Room.EAST, x , y + 1);
         room.setNeighbour(Room.SOUTH, addedRoom);
         map[x][y + 1] = room.getNeighbour(Room.SOUTH);
         availableRooms.add(room.getNeighbour(Room.SOUTH));
         checkForBorder(addedRoom, addedRoom.getLocation());
         
+        //adds first room east of the spawn room
         addedRoom = new Room(map[x][y], Room.WEST, x + 1, y);
         room.setNeighbour(Room.EAST, addedRoom);
         map[x + 1][y] = room.getNeighbour(Room.EAST);
         availableRooms.add(room.getNeighbour(Room.EAST));
         checkForBorder(addedRoom, addedRoom.getLocation());
         
-        //5 rooms were already created
+        //randomises the placement of rooms in the dungeon based on seed
         int dir1, dir2, rand;
         Room tempRoom;
         for(int i = 4; i < maxRooms; ++i){
@@ -148,17 +152,24 @@ public class GUI extends javax.swing.JFrame {
             while(map[x][y].getNeighbour(rand) != null){
                 rand = randNumber.nextInt(4);
             }
+            //checks if "door" exists on a room
             if(rand == Room.NORTH){
                 dir1 = Room.NORTH;
                 dir2 = Room.SOUTH;
+                //checks if room doesn't exist in North position
                 if(map[x][y - 1] == null){
+                    //adds room is north position with "door" in correct location
                     addedRoom = new Room(map[x][y], dir2, x, y - 1);
                     map[x][y].setNeighbour(dir1, addedRoom);
+                    //sets the room in the curent room's North position to newly created room
                     map[x][y - 1] = map[x][y].getNeighbour(dir1);
+                    //adds the newly created room to the list of available rooms to build from
                     availableRooms.add(map[x][y].getNeighbour(dir1));
                 } else {
+                    //if a room exists in north position, add as neighbour room
                     map[x][y].setNeighbour(dir1, map[x][y - 1]);
                     map[x][y - 1] = map[x][y].getNeighbour(dir1);
+                    //reduces the wall count
                     --i;
                 }
             } else if (rand == Room.SOUTH){

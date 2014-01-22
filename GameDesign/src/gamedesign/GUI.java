@@ -25,7 +25,7 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
-        draw();
+        
         randNumber = new Random();
         java.util.Date date = new java.util.Date();
         seed = date.getTime();
@@ -42,6 +42,7 @@ public class GUI extends javax.swing.JFrame {
             }
             System.out.println();
         }
+        draw();
     }
     
     /**

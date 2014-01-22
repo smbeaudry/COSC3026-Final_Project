@@ -25,6 +25,7 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
+        draw();
         randNumber = new Random();
         java.util.Date date = new java.util.Date();
         seed = date.getTime();
@@ -40,6 +41,26 @@ public class GUI extends javax.swing.JFrame {
                 }
             }
             System.out.println();
+        }
+    }
+    
+    /**
+     * Method that will draw the base map
+     */
+    private void draw(){
+        for(Room[] rooms : map){
+            for(Room room : rooms){
+                if(room != null){
+                    if(room.isVisited()){
+                        //draw room
+                    } else {
+                        //Black label
+                    }
+                } else {
+                    //we could draw something or nothing here, this is debatable
+                }
+            }
+            
         }
     }
 

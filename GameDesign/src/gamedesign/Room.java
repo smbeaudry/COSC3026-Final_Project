@@ -11,7 +11,7 @@ package gamedesign;
  * @author Luc Breault
  */
 public class Room {
-    protected boolean visited;
+    protected boolean visited, firstRoom;
     protected Room[] neighbours;
     protected boolean[] doors;
     protected String roomType; //used for room graphic
@@ -24,6 +24,7 @@ public class Room {
         doors = new boolean[4];
         roomType = null;
         location = null;
+        firstRoom = false;
     }
     
     public Room(Room neighbour, int direction, int x, int y){
@@ -35,6 +36,7 @@ public class Room {
         location = new int[2];
         location[0] = x;
         location[1] = y;
+        firstRoom = false;
     }
     
     /**
@@ -59,6 +61,7 @@ public class Room {
             this.doors[i] = doors[i];
         this.roomType = roomType;
         this.location = new int[2];
+        firstRoom = false;
     }
     
     /**
@@ -157,6 +160,24 @@ public class Room {
     }
     
     /**
+     * Gets the value of firstRoom
+     * 
+     * @return true if this is the first room
+     */
+    public boolean isFirst(){
+        return firstRoom;
+    }
+    
+    /**
+     * Sets the room as the first room or removes it as the first room
+     * 
+     * @param isFirst true if this is the first room else false
+     */
+    public void setAsFirst(boolean isFirst){
+        firstRoom = isFirst;
+    }
+    
+    /**
      * Checks neighbours to see if a door should be added or not
      */
     public void createDoors(){
@@ -175,6 +196,18 @@ public class Room {
      * @return String to represent room
      */
     public String toString(){
-        return location[0] + "," + location[1];
+        String result = "";
+        if(firstRoom){
+            result += "/";
+        } else {
+            result += " ";
+        }
+        result += location[0] + "," + location[1];
+        if(firstRoom){
+            result += "/";
+        } else {
+            result += " ";
+        }
+        return result;
     }
 }
